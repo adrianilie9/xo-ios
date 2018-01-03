@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		2BB2AE0671CA3C1096A5DA49 /* Pods_XO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */; };
+		A033E7BD1FFD7C2A00A19BAB /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A033E7BC1FFD7C2A00A19BAB /* SpriteKit.framework */; };
+		A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */; };
+		A033E7C61FFD7CE300A19BAB /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C31FFD7C9F00A19BAB /* Dosis-Bold.ttf */; };
+		A033E7C71FFD7CE300A19BAB /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C51FFD7C9F00A19BAB /* Dosis-Regular.ttf */; };
+		A033E7C81FFD7CE300A19BAB /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C41FFD7C9F00A19BAB /* Dosis-SemiBold.ttf */; };
+		A033E7C91FFD7CE300A19BAB /* fa-regular-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C11FFD7C9F00A19BAB /* fa-regular-400.ttf */; };
+		A033E7CA1FFD7CE300A19BAB /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C21FFD7C9F00A19BAB /* fa-solid-900.ttf */; };
+		A033E7CC1FFD7DCA00A19BAB /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */; };
+		A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033E7CD1FFD81A000A19BAB /* GameViewController.swift */; };
 		E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176851FFD263500F4D3A7 /* AppDelegate.swift */; };
 		E8A176911FFD263500F4D3A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A1768F1FFD263500F4D3A7 /* Main.storyboard */; };
 		E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A176921FFD263500F4D3A7 /* Assets.xcassets */; };
@@ -20,6 +29,15 @@
 
 /* Begin PBXFileReference section */
 		34EF3F6A4CCB6F063F64CCB4 /* Pods-XO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO.release.xcconfig"; path = "Pods/Target Support Files/Pods-XO/Pods-XO.release.xcconfig"; sourceTree = "<group>"; };
+		A033E7BC1FFD7C2A00A19BAB /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		A033E7C11FFD7C9F00A19BAB /* fa-regular-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.ttf"; sourceTree = "<group>"; };
+		A033E7C21FFD7C9F00A19BAB /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
+		A033E7C31FFD7C9F00A19BAB /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
+		A033E7C41FFD7C9F00A19BAB /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
+		A033E7C51FFD7C9F00A19BAB /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
+		A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		A033E7CD1FFD81A000A19BAB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E8A176821FFD263500F4D3A7 /* XO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A176851FFD263500F4D3A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A176901FFD263500F4D3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A033E7BD1FFD7C2A00A19BAB /* SpriteKit.framework in Frameworks */,
 				2BB2AE0671CA3C1096A5DA49 /* Pods_XO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,9 +70,23 @@
 		541BD4DBF034B7FF526581AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A033E7BC1FFD7C2A00A19BAB /* SpriteKit.framework */,
 				F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A033E7C01FFD7C7E00A19BAB /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */,
+				A033E7C31FFD7C9F00A19BAB /* Dosis-Bold.ttf */,
+				A033E7C51FFD7C9F00A19BAB /* Dosis-Regular.ttf */,
+				A033E7C41FFD7C9F00A19BAB /* Dosis-SemiBold.ttf */,
+				A033E7C11FFD7C9F00A19BAB /* fa-regular-400.ttf */,
+				A033E7C21FFD7C9F00A19BAB /* fa-solid-900.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		D47B38CC70CAF8AB6A23FB3C /* Pods */ = {
@@ -110,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A176921FFD263500F4D3A7 /* Assets.xcassets */,
+				A033E7C01FFD7C7E00A19BAB /* Font */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -138,6 +172,7 @@
 				E8A1768F1FFD263500F4D3A7 /* Main.storyboard */,
 				E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */,
 				E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */,
+				A033E7CD1FFD81A000A19BAB /* GameViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -145,6 +180,7 @@
 		E8A176A41FFD289400F4D3A7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -211,6 +247,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A033E7CC1FFD7DCA00A19BAB /* Lato-Regular.ttf in Resources */,
+				A033E7C61FFD7CE300A19BAB /* Dosis-Bold.ttf in Resources */,
+				A033E7C71FFD7CE300A19BAB /* Dosis-Regular.ttf in Resources */,
+				A033E7C81FFD7CE300A19BAB /* Dosis-SemiBold.ttf in Resources */,
+				A033E7C91FFD7CE300A19BAB /* fa-regular-400.ttf in Resources */,
+				A033E7CA1FFD7CE300A19BAB /* fa-solid-900.ttf in Resources */,
 				E8A1769E1FFD278F00F4D3A7 /* Podfile in Resources */,
 				E8A176911FFD263500F4D3A7 /* Main.storyboard in Resources */,
 				E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */,
@@ -273,9 +315,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */,
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
 				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
 				E8A176A81FFD2CB500F4D3A7 /* MenuViewController.swift in Sources */,
+				A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */,
 				E8A176A61FFD2A4300F4D3A7 /* BootstrapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

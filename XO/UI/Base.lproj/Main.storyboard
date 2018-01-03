@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Dosis-Bold.ttf">
+            <string>Dosis-Bold</string>
+        </array>
+        <array key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Bootstrap View Controller-->
         <scene sceneID="api-XG-KU4">
@@ -33,24 +41,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="YjB-Yx-c5T" userLabel="logoImageView">
+                                <rect key="frame" x="141" y="130" width="92" height="110"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="baB-C3-A2u"/>
+                                    <constraint firstAttribute="width" constant="92" id="mI3-wy-rSS"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mo3-jP-tZk" userLabel="buttonPlayView">
+                                <rect key="frame" x="104" y="340" width="166" height="63"/>
+                                <subviews>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Button_Play_Default" translatesAutoresizingMaskIntoConstraints="NO" id="sPi-NG-ng0" userLabel="backgroundImageView">
+                                        <rect key="frame" x="0.0" y="-0.5" width="166" height="63"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jut-sX-mES" userLabel="label">
+                                        <rect key="frame" x="37" y="13" width="93" height="38"/>
+                                        <fontDescription key="fontDescription" name="Dosis-Bold" family="Dosis" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="sPi-NG-ng0" firstAttribute="centerX" secondItem="mo3-jP-tZk" secondAttribute="centerX" id="0fF-RT-xQg"/>
+                                    <constraint firstItem="sPi-NG-ng0" firstAttribute="width" secondItem="mo3-jP-tZk" secondAttribute="width" id="Hjp-w6-MZ9"/>
+                                    <constraint firstItem="sPi-NG-ng0" firstAttribute="centerY" secondItem="mo3-jP-tZk" secondAttribute="centerY" id="JY0-c8-hIr"/>
+                                    <constraint firstAttribute="width" constant="166" id="Sb4-7R-Xnw"/>
+                                    <constraint firstAttribute="height" constant="63" id="Vg0-15-K0X"/>
+                                    <constraint firstItem="Jut-sX-mES" firstAttribute="centerY" secondItem="mo3-jP-tZk" secondAttribute="centerY" id="a8y-Vy-5a5"/>
+                                    <constraint firstItem="Jut-sX-mES" firstAttribute="centerX" secondItem="mo3-jP-tZk" secondAttribute="centerX" id="m9c-9X-f5j"/>
+                                    <constraint firstItem="sPi-NG-ng0" firstAttribute="height" secondItem="mo3-jP-tZk" secondAttribute="height" id="ohc-fd-g68"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © Nixiware 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8n-Ku-2de" userLabel="labelCopyright">
-                                <rect key="frame" x="95" y="639" width="184.5" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="84.5" y="627" width="205.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.85490196078431369" green="0.92941176470588238" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aDz-9f-k15" firstAttribute="bottom" secondItem="G8n-Ku-2de" secondAttribute="bottom" constant="10" id="LaT-L6-cxB"/>
+                            <constraint firstItem="mo3-jP-tZk" firstAttribute="top" secondItem="YjB-Yx-c5T" secondAttribute="bottom" constant="100" id="8Xd-Ee-DpD"/>
+                            <constraint firstItem="mo3-jP-tZk" firstAttribute="centerX" secondItem="aDz-9f-k15" secondAttribute="centerX" id="Ecf-iA-Kg9"/>
+                            <constraint firstItem="aDz-9f-k15" firstAttribute="bottom" secondItem="G8n-Ku-2de" secondAttribute="bottom" constant="20" id="LaT-L6-cxB"/>
                             <constraint firstItem="G8n-Ku-2de" firstAttribute="centerX" secondItem="aDz-9f-k15" secondAttribute="centerX" id="VXa-XS-X2a"/>
+                            <constraint firstItem="YjB-Yx-c5T" firstAttribute="centerX" secondItem="aDz-9f-k15" secondAttribute="centerX" id="nzD-ft-jlp"/>
+                            <constraint firstItem="YjB-Yx-c5T" firstAttribute="top" secondItem="aDz-9f-k15" secondAttribute="top" constant="110" id="tA6-Aj-ohI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aDz-9f-k15"/>
                     </view>
+                    <connections>
+                        <outlet property="buttonPlayBackgroundImageView" destination="sPi-NG-ng0" id="Do0-Bs-PRc"/>
+                        <outlet property="buttonPlayLabel" destination="Jut-sX-mES" id="dhN-Ff-VZh"/>
+                        <outlet property="buttonPlayView" destination="mo3-jP-tZk" id="XaH-qB-GfT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8lb-bN-Exn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="919" y="83"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Button_Play_Default" width="166" height="63"/>
+        <image name="Logo" width="92" height="110"/>
+    </resources>
 </document>
