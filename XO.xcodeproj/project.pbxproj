@@ -13,6 +13,9 @@
 		E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A176921FFD263500F4D3A7 /* Assets.xcassets */; };
 		E8A176961FFD263500F4D3A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A176941FFD263500F4D3A7 /* LaunchScreen.storyboard */; };
 		E8A1769E1FFD278F00F4D3A7 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E8A1769D1FFD278F00F4D3A7 /* Podfile */; };
+		E8A176A61FFD2A4300F4D3A7 /* BootstrapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */; };
+		E8A176A81FFD2CB500F4D3A7 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */; };
+		E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,11 @@
 		E8A176951FFD263500F4D3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8A176971FFD263500F4D3A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8A1769D1FFD278F00F4D3A7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstrapViewController.swift; sourceTree = "<group>"; };
+		E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E8A176AB1FFD361700F4D3A7 /* NXUIKitUtil-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NXUIKitUtil-Bridging-Header.h"; sourceTree = "<group>"; };
+		E8A176AC1FFD382C00F4D3A7 /* NXDeviceDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXDeviceDetector.h; sourceTree = "<group>"; };
+		E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXDeviceDetector.swift; sourceTree = "<group>"; };
 		F13B6A746A8B3871041FE733 /* Pods-XO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XO/Pods-XO.debug.xcconfig"; sourceTree = "<group>"; };
 		F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -79,6 +87,7 @@
 		E8A176841FFD263500F4D3A7 /* XO */ = {
 			isa = PBXGroup;
 			children = (
+				E8A176971FFD263500F4D3A7 /* Info.plist */,
 				E8A1769F1FFD283000F4D3A7 /* Application */,
 				E8A176A01FFD283700F4D3A7 /* Resource */,
 				E8A176A11FFD285000F4D3A7 /* Library */,
@@ -93,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				E8A176851FFD263500F4D3A7 /* AppDelegate.swift */,
-				E8A176971FFD263500F4D3A7 /* Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -109,6 +117,9 @@
 		E8A176A11FFD285000F4D3A7 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E8A176AB1FFD361700F4D3A7 /* NXUIKitUtil-Bridging-Header.h */,
+				E8A176AC1FFD382C00F4D3A7 /* NXDeviceDetector.h */,
+				E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -125,6 +136,8 @@
 			children = (
 				E8A176941FFD263500F4D3A7 /* LaunchScreen.storyboard */,
 				E8A1768F1FFD263500F4D3A7 /* Main.storyboard */,
+				E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */,
+				E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -261,6 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
+				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
+				E8A176A81FFD2CB500F4D3A7 /* MenuViewController.swift in Sources */,
+				E8A176A61FFD2A4300F4D3A7 /* BootstrapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,10 +417,12 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = XO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixiware.XO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "XO/Library/NXUIKitUtil-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -418,10 +436,12 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = XO/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixiware.XO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "XO/Library/NXUIKitUtil-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
