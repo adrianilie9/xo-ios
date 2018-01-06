@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2BB2AE0671CA3C1096A5DA49 /* Pods_XO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */; };
+		A020A52A20015BEA0047F5F1 /* UISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A020A52920015BEA0047F5F1 /* UISettings.swift */; };
 		A033E7BD1FFD7C2A00A19BAB /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A033E7BC1FFD7C2A00A19BAB /* SpriteKit.framework */; };
 		A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */; };
 		A033E7C61FFD7CE300A19BAB /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C31FFD7C9F00A19BAB /* Dosis-Bold.ttf */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		34EF3F6A4CCB6F063F64CCB4 /* Pods-XO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO.release.xcconfig"; path = "Pods/Target Support Files/Pods-XO/Pods-XO.release.xcconfig"; sourceTree = "<group>"; };
+		A020A52920015BEA0047F5F1 /* UISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISettings.swift; sourceTree = "<group>"; };
 		A033E7BC1FFD7C2A00A19BAB /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		A033E7C11FFD7C9F00A19BAB /* fa-regular-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.ttf"; sourceTree = "<group>"; };
@@ -48,7 +50,6 @@
 		E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootstrapViewController.swift; sourceTree = "<group>"; };
 		E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		E8A176AB1FFD361700F4D3A7 /* NXUIKitUtil-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NXUIKitUtil-Bridging-Header.h"; sourceTree = "<group>"; };
-		E8A176AC1FFD382C00F4D3A7 /* NXDeviceDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NXDeviceDetector.h; sourceTree = "<group>"; };
 		E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NXDeviceDetector.swift; sourceTree = "<group>"; };
 		F13B6A746A8B3871041FE733 /* Pods-XO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-XO/Pods-XO.debug.xcconfig"; sourceTree = "<group>"; };
 		F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +75,14 @@
 				F6A8C4C50913CC98CF07A1C7 /* Pods_XO.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A020A52820015BD30047F5F1 /* Shared components */ = {
+			isa = PBXGroup;
+			children = (
+				A020A52920015BEA0047F5F1 /* UISettings.swift */,
+			);
+			path = "Shared components";
 			sourceTree = "<group>";
 		};
 		A033E7C01FFD7C7E00A19BAB /* Font */ = {
@@ -152,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				E8A176AB1FFD361700F4D3A7 /* NXUIKitUtil-Bridging-Header.h */,
-				E8A176AC1FFD382C00F4D3A7 /* NXDeviceDetector.h */,
 				E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */,
 			);
 			path = Library;
@@ -173,6 +181,7 @@
 				E8A176A51FFD2A4300F4D3A7 /* BootstrapViewController.swift */,
 				E8A176A71FFD2CB500F4D3A7 /* MenuViewController.swift */,
 				A033E7CD1FFD81A000A19BAB /* GameViewController.swift */,
+				A020A52820015BD30047F5F1 /* Shared components */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -315,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A020A52A20015BEA0047F5F1 /* UISettings.swift in Sources */,
 				A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */,
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
 				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
@@ -459,13 +469,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8ZC64DV744;
 				INFOPLIST_FILE = XO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixiware.XO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "7d21076b-5cf0-4cb0-af07-ff14c042b6f6";
+				PROVISIONING_PROFILE_SPECIFIER = "XO (Dev)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XO/Library/NXUIKitUtil-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,13 +489,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8ZC64DV744;
 				INFOPLIST_FILE = XO/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nixiware.XO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "7d21076b-5cf0-4cb0-af07-ff14c042b6f6";
+				PROVISIONING_PROFILE_SPECIFIER = "XO (Dev)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XO/Library/NXUIKitUtil-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
