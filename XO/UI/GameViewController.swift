@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 class GameViewController: UIViewController {
     
@@ -16,18 +17,22 @@ class GameViewController: UIViewController {
     @IBOutlet weak var countdownIconLabel: UILabel!
     @IBOutlet weak var countdownLabel: UILabel!
     
+    @IBOutlet weak var sceneView: SKView!
+    
     private var gameScene: GameScene?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupUi()
+        self.prepareScene()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.showUi(completionHandler: nil)
+        self.loadScene()
     }
     
     // MARK: - UI
@@ -84,6 +89,16 @@ class GameViewController: UIViewController {
     
     func setupContent() {
         
+    }
+    
+    // MARK: - Scene
+    
+    func prepareScene() {
+        self.gameScene = GameScene.init(size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 100.0))
+    }
+    
+    func loadScene() {
+        self.sceneView.presentScene(self.gameScene)
     }
     
     // MARK: - Navigation
