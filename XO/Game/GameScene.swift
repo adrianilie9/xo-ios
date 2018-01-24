@@ -30,6 +30,10 @@ class GameScene: SKScene {
 
 class Grid: SKNode {
     public var size: CGSize = CGSize.zero
+    private var horizontalStep: CGFloat = 0.0
+    private var verticalStep: CGFloat = 0.0
+    
+    fileprivate var map = Array2D<Sign>(columns: 3, rows: 3)
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -45,22 +49,25 @@ class Grid: SKNode {
         self.addChild(background)
         
         self.drawLines()
+        
+        self.map[0, 0] = Sign(type: .X, color: .Player)
+        self.map[1, 0] = Sign(type: .Y, color: .Enemy)
     }
     
-    func drawLines() {
-        let horizontalStep = self.size.width / 3.0
-        let verticalStep = self.size.height / 3.0
+    public func drawLines() {
+        self.horizontalStep = self.size.width / 3.0
+        self.verticalStep = self.size.height / 3.0
         
         for i in 1 ... 2 {
-            let lineOrigin = CGPoint.init(x: 0.0, y: verticalStep * CGFloat(i))
-            let lineDestination = CGPoint.init(x: self.size.width, y: verticalStep * CGFloat(i))
+            let lineOrigin = CGPoint.init(x: 0.0, y: self.verticalStep * CGFloat(i))
+            let lineDestination = CGPoint.init(x: self.size.width, y: self.verticalStep * CGFloat(i))
             
             self.drawLine(origin: lineOrigin, destination: lineDestination)
         }
         
         for i in 1 ... 2 {
-            let lineOrigin = CGPoint.init(x: horizontalStep * CGFloat(i), y: 0)
-            let lineDestination = CGPoint.init(x: horizontalStep * CGFloat(i), y: self.size.height)
+            let lineOrigin = CGPoint.init(x: self.horizontalStep * CGFloat(i), y: 0)
+            let lineDestination = CGPoint.init(x: self.horizontalStep * CGFloat(i), y: self.size.height)
             
             self.drawLine(origin: lineOrigin, destination: lineDestination)
         }
@@ -94,13 +101,14 @@ class Sign {
     public var color: SignColor = .Player
     
     private var spriteLabelValue: String = "X"
-    public var sprite: SKLabelNode? = nil
+    public var sprite: SKLabelNode = SKLabelNode()
     public let spriteSize: CGSize = CGSize.zero
     
-    convenience init(type: SignType) {
+    convenience init(type: SignType, color: SignColor) {
         self.init()
-        
         self.type = type
+        self.color = color
+        
         switch self.type {
         case .X:
             self.spriteLabelValue = "X"
@@ -108,17 +116,17 @@ class Sign {
             self.spriteLabelValue = "Y"
         }
         
-        self.sprite = SKLabelNode.init(text: self.spriteLabelValue)
-        self.sprite?.horizontalAlignmentMode = .center
-        self.sprite?.verticalAlignmentMode = .center
-        self.sprite?.fontName = UISettings.sharedInstance.font1SemiBold
-        self.sprite?.fontSize = (self.spriteSize.width + self.spriteSize.height) / 2.0
+        self.sprite.text = self.spriteLabelValue
+        self.sprite.horizontalAlignmentMode = .center
+        self.sprite.verticalAlignmentMode = .center
+        self.sprite.fontName = UISettings.sharedInstance.font1SemiBold
+        self.sprite.fontSize = (self.spriteSize.width + self.spriteSize.height) / 2.0
         
         switch self.color {
         case .Player:
-            self.sprite?.fontColor = UIColor.init(red: 90.0/255.0, green: 177.0/255.0, blue: 142.0/255.0, alpha: 1.0)
+            self.sprite.fontColor = UIColor.init(red: 90.0/255.0, green: 177.0/255.0, blue: 142.0/255.0, alpha: 1.0)
         case .Enemy:
-            self.sprite?.fontColor = UIColor.init(red: 238/255.0, green: 101.0/255.0, blue: 129.0/255.0, alpha: 1.0)
+            self.sprite.fontColor = UIColor.init(red: 238/255.0, green: 101.0/255.0, blue: 129.0/255.0, alpha: 1.0)
         }
     }
 }

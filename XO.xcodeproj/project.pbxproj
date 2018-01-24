@@ -18,6 +18,7 @@
 		A033E7CA1FFD7CE300A19BAB /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7C21FFD7C9F00A19BAB /* fa-solid-900.ttf */; };
 		A033E7CC1FFD7DCA00A19BAB /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */; };
 		A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033E7CD1FFD81A000A19BAB /* GameViewController.swift */; };
+		A0425F6620192AFB003B1B15 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425F6520192AFB003B1B15 /* Array2D.swift */; };
 		E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176851FFD263500F4D3A7 /* AppDelegate.swift */; };
 		E8A176911FFD263500F4D3A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A1768F1FFD263500F4D3A7 /* Main.storyboard */; };
 		E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A176921FFD263500F4D3A7 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		A033E7C51FFD7C9F00A19BAB /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
 		A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		A033E7CD1FFD81A000A19BAB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		A0425F6520192AFB003B1B15 /* Array2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		E8A176821FFD263500F4D3A7 /* XO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A176851FFD263500F4D3A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A176901FFD263500F4D3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				E8A176AB1FFD361700F4D3A7 /* NXUIKitUtil-Bridging-Header.h */,
 				E8A176AD1FFD397D00F4D3A7 /* NXDeviceDetector.swift */,
+				A0425F6520192AFB003B1B15 /* Array2D.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -320,7 +323,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -335,6 +338,7 @@
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
 				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
 				E8A176A81FFD2CB500F4D3A7 /* MenuViewController.swift in Sources */,
+				A0425F6620192AFB003B1B15 /* Array2D.swift in Sources */,
 				A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */,
 				E8A176A61FFD2A4300F4D3A7 /* BootstrapViewController.swift in Sources */,
 			);
