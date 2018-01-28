@@ -19,6 +19,8 @@
 		A033E7CC1FFD7DCA00A19BAB /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */; };
 		A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A033E7CD1FFD81A000A19BAB /* GameViewController.swift */; };
 		A0425F6620192AFB003B1B15 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425F6520192AFB003B1B15 /* Array2D.swift */; };
+		A0C20B59201E60E90084012A /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C20B58201E60E90084012A /* Grid.swift */; };
+		A0C20B5C201E611E0084012A /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C20B5B201E611E0084012A /* Sign.swift */; };
 		E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176851FFD263500F4D3A7 /* AppDelegate.swift */; };
 		E8A176911FFD263500F4D3A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A1768F1FFD263500F4D3A7 /* Main.storyboard */; };
 		E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A176921FFD263500F4D3A7 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		A033E7CB1FFD7DB800A19BAB /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		A033E7CD1FFD81A000A19BAB /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		A0425F6520192AFB003B1B15 /* Array2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
+		A0C20B58201E60E90084012A /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		A0C20B5B201E611E0084012A /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
 		E8A176821FFD263500F4D3A7 /* XO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A176851FFD263500F4D3A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A176901FFD263500F4D3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +102,23 @@
 				A033E7C21FFD7C9F00A19BAB /* fa-solid-900.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		A0C20B5A201E61140084012A /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				A0C20B58201E60E90084012A /* Grid.swift */,
+				A0C20B5B201E611E0084012A /* Sign.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		A0C20B5D201E61410084012A /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		D47B38CC70CAF8AB6A23FB3C /* Pods */ = {
@@ -192,7 +213,8 @@
 		E8A176A41FFD289400F4D3A7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				A033E7BE1FFD7C3B00A19BAB /* GameScene.swift */,
+				A0C20B5D201E61410084012A /* Scene */,
+				A0C20B5A201E61140084012A /* Component */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -335,12 +357,14 @@
 			files = (
 				A020A52A20015BEA0047F5F1 /* UISettings.swift in Sources */,
 				A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */,
+				A0C20B5C201E611E0084012A /* Sign.swift in Sources */,
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
 				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
 				E8A176A81FFD2CB500F4D3A7 /* MenuViewController.swift in Sources */,
 				A0425F6620192AFB003B1B15 /* Array2D.swift in Sources */,
 				A033E7CE1FFD81A000A19BAB /* GameViewController.swift in Sources */,
 				E8A176A61FFD2A4300F4D3A7 /* BootstrapViewController.swift in Sources */,
+				A0C20B59201E60E90084012A /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
