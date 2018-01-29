@@ -69,24 +69,22 @@ class GameScene: SKScene {
         print("evaluateState")
         
         var nextState: GameState?
-        var winningLine: (Int, Int, Int)?
+        var winningLine: (GridMapLocation, GridMapLocation, GridMapLocation)?
         
         // checking columns
-        for y in 0 ... 2 {
-            guard let firstSign = self.grid?.getSign(x: 0, y: y) else { continue }
+        for x in 0 ... 2 {
+            guard let firstSign = self.grid?.getSign(location: GridMapLocation(x: x, y: 0)) else { continue }
             var signCount = 1
             
-            for x in 1 ... 2 {
-                guard let sign = self.grid?.getSign(x: x, y: y) else { break }
+            for y in 1 ... 2 {
+                guard let sign = self.grid?.getSign(location: GridMapLocation(x: x, y: y)) else { break }
                 if (sign.type == firstSign.type) {
                     signCount += 1
                 }
             }
             
-            print(signCount)
-            
             if (signCount == 3) {
-                winningLine = (y, 1, 2)
+                winningLine = (GridMapLocation(x: x, y: 0), GridMapLocation(x: x, y: 1), GridMapLocation(x: x, y: 2))
                 
                 if (firstSign.type == .X) {
                     nextState = .WonPlayer1
@@ -96,10 +94,69 @@ class GameScene: SKScene {
             }
         }
         
-        guard let state = nextState, let line = winningLine else { return }
+        // checking rows
+        for y in 0 ... 2 {
+            guard let firstSign = self.grid?.getSign(location: GridMapLocation(x: 0, y: y)) else { continue }
+            var signCount = 1
+            
+            for x in 1 ... 2 {
+                guard let sign = self.grid?.getSign(location: GridMapLocation(x: x, y: y)) else { break }
+                if (sign.type == firstSign.type) {
+                    signCount += 1
+                }
+            }
+            
+            if (signCount == 3) {
+                winningLine = (GridMapLocation(x: 0, y: y), GridMapLocation(x: 1, y: y), GridMapLocation(x: 2, y: y))
+                
+                if (firstSign.type == .X) {
+                    nextState = .WonPlayer1
+                } else if (firstSign.type == .O) {
+                    nextState = .WonPlayer2
+                }
+            }
+        }
+        
+        // checking diagonals
+        let diagonals: Array<Array<GridMapLocation>> = [
+            [GridMapLocation(x: 0, y: 0), GridMapLocation(x: 1, y: 1), GridMapLocation(x: 2, y: 2)],
+            [GridMapLocation(x: 2, y: 0), GridMapLocation(x: 1, y: 1), GridMapLocation(x: 0, y: 2)]
+        ]
+        for diagonal in diagonals {
+            guard let firstSign = self.grid?.getSign(location: diagonal[0]) else { continue }
+            var signCount = 1
+            
+            for index in 1 ... 2 {
+                guard let sign = self.grid?.getSign(location: diagonal[index]) else { break }
+                if (sign.type == firstSign.type) {
+                    signCount += 1
+                }
+            }
+            
+            if (signCount == 3) {
+                winningLine = (diagonal[0], diagonal[1], diagonal[2])
+                
+                if (firstSign.type == .X) {
+                    nextState = .WonPlayer1
+                } else if (firstSign.type == .O) {
+                    nextState = .WonPlayer2
+                }
+            }
+        }
+        
+        if (nextState == nil && self.grid?.getSignsCount() == 9) {
+            nextState = .Draw
+        }
+        
+        guard let state = nextState else {
+            return
+        }
         
         print(state)
-        print(line)
+        
+        if let line = winningLine {
+            print(line)
+        }
     }
     
     // MARK: - Input
@@ -111,7 +168,6 @@ class GameScene: SKScene {
             if let grid = node as? Grid {
                 let gridTouchLocation = touch.location(in: grid)
                 guard let location = grid.getMapPosition(point: gridTouchLocation) else { return }
-                
                 
                 if (self.mode == .PlayerVersusPlayer) {
                     var signToAdd: Sign?
@@ -125,7 +181,8 @@ class GameScene: SKScene {
                     }
                     
                     guard let sign = signToAdd, let state = nextState else { return }
-                    if (grid.addSign(x: location.0, y: location.1, sign: sign)) {
+                    
+                    if (grid.addSign(location: location, sign: sign)) {
                         self.state = state
                         self.evaluateState()
                     } else {
@@ -133,7 +190,7 @@ class GameScene: SKScene {
                     }
                 } else if (self.mode == .PlayerVersusAI) {
                     if (self.state == .WaitingPlayer1Turn) {
-                        if (grid.addSign(x: location.0, y: location.1, sign: Sign(type: .X, color: .Player1))) {
+                        if (grid.addSign(location: location, sign: Sign(type: .X, color: .Player1))) {
                             self.state = .WaitingPlayer2Turn
                             self.evaluateState()
                         } else {
