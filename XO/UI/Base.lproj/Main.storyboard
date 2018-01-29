@@ -184,6 +184,12 @@
                                 <rect key="frame" x="0.0" y="120" width="375" height="567"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvs-0i-maj" userLabel="infoLabel">
+                                <rect key="frame" x="156" y="616" width="62.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.85490196080000003" green="0.92941176469999998" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -193,7 +199,9 @@
                             <constraint firstItem="YNh-7h-GaK" firstAttribute="top" secondItem="fzy-IU-nTx" secondAttribute="bottom" id="IRv-mb-rfI"/>
                             <constraint firstItem="YNh-7h-GaK" firstAttribute="centerX" secondItem="h7A-cy-h9h" secondAttribute="centerX" id="LqW-em-h3u"/>
                             <constraint firstItem="YNh-7h-GaK" firstAttribute="height" secondItem="xee-Us-wpL" secondAttribute="height" constant="-100" id="VMa-9H-iGP"/>
+                            <constraint firstItem="h7A-cy-h9h" firstAttribute="bottom" secondItem="jvs-0i-maj" secondAttribute="bottom" constant="30" id="aHr-F9-K5y"/>
                             <constraint firstItem="fzy-IU-nTx" firstAttribute="top" secondItem="h7A-cy-h9h" secondAttribute="top" id="bN8-Im-W7B"/>
+                            <constraint firstItem="jvs-0i-maj" firstAttribute="centerX" secondItem="h7A-cy-h9h" secondAttribute="centerX" id="wsT-vP-id6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h7A-cy-h9h"/>
                     </view>
@@ -203,6 +211,7 @@
                         <outlet property="buttonMenuView" destination="i1l-KM-8LH" id="sIe-2Z-i5x"/>
                         <outlet property="countdownIconLabel" destination="7x0-MI-AJ0" id="Zyb-lu-dtw"/>
                         <outlet property="countdownLabel" destination="Elv-6I-JDM" id="ZW3-dW-2Ud"/>
+                        <outlet property="infoLabel" destination="jvs-0i-maj" id="QlE-st-fIG"/>
                         <outlet property="sceneView" destination="YNh-7h-GaK" id="V8c-4f-VBq"/>
                     </connections>
                 </viewController>

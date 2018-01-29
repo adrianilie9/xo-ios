@@ -14,13 +14,13 @@ enum SignType {
 }
 
 enum SignColor {
-    case Player
-    case Enemy
+    case Player1
+    case Player2
 }
 
 class Sign {
     public var type: SignType = .X
-    public var color: SignColor = .Player
+    public var color: SignColor = .Player1
     
     private var spriteLabelValue: String = "X"
     public var sprite: SKLabelNode = SKLabelNode()
@@ -43,9 +43,9 @@ class Sign {
         self.sprite.fontName = UISettings.sharedInstance.font1SemiBold
         
         switch self.color {
-        case .Player:
+        case .Player1:
             self.sprite.fontColor = UIColor.init(red: 90.0/255.0, green: 177.0/255.0, blue: 142.0/255.0, alpha: 1.0)
-        case .Enemy:
+        case .Player2:
             self.sprite.fontColor = UIColor.init(red: 238/255.0, green: 101.0/255.0, blue: 129.0/255.0, alpha: 1.0)
         }
     }

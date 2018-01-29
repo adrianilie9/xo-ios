@@ -19,6 +19,8 @@ class GameViewController: UIViewController {
     
     @IBOutlet weak var sceneView: SKView!
     
+    @IBOutlet weak var infoLabel: UILabel!
+    
     private var gameScene: GameScene?
 
     override func viewDidLoad() {
@@ -94,7 +96,10 @@ class GameViewController: UIViewController {
     // MARK: - Scene
     
     func prepareScene() {
-        self.gameScene = GameScene.init(size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 100.0))
+        self.gameScene = GameScene.init(
+            size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 100.0),
+            mode: .PlayerVersusPlayer
+        )
     }
     
     func loadScene() {

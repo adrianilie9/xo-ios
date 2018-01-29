@@ -108,5 +108,7 @@ class Grid: SKNode {
         return true
     }
     
-    
+    func getSign(x: Int, y: Int) -> Sign? {
+        return self.map[x, y]
+    }
 }
