@@ -66,8 +66,6 @@ class GameScene: SKScene {
     // MARK: - State
     
     func evaluateState() {
-        print("evaluateState")
-        
         var nextState: GameState?
         var winningLine: (GridMapLocation, GridMapLocation, GridMapLocation)?
         

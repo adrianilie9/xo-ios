@@ -101,13 +101,24 @@ class Grid: SKNode {
     }
     
     fileprivate func drawWinningLine(origin: CGPoint, destination: CGPoint) {
+        var extendedOrigin: CGPoint?
+        var extendedDestination: CGPoint?
+        
         if (origin.x == destination.x) { // vertical line
-            
+            extendedOrigin = CGPoint(x: origin.x, y: origin.y - self.verticalStep * 0.5)
+            extendedDestination = CGPoint(x: destination.x, y: destination.y + self.verticalStep * 0.5)
         } else if (origin.y == destination.y) { // horizontal line
-            
-        } else { // diagonal line
-            
+            extendedOrigin = CGPoint(x: origin.x - self.horizontalStep * 0.5, y: origin.y)
+            extendedDestination = CGPoint(x: destination.x + self.horizontalStep * 0.5, y: destination.y)
+        } else if (origin.x < destination.x) { // 1st diagonal line
+            extendedOrigin = CGPoint(x: origin.x - self.horizontalStep * 0.5, y: origin.y - self.verticalStep * 0.5)
+            extendedDestination = CGPoint(x: destination.x + self.horizontalStep * 0.5, y: destination.y + self.verticalStep * 0.5)
+        } else if (origin.x > destination.x) { // 2nd diagonal line
+            extendedOrigin = CGPoint(x: origin.x + self.horizontalStep * 0.5, y: origin.y - self.verticalStep * 0.5)
+            extendedDestination = CGPoint(x: destination.x - self.horizontalStep * 0.5, y: destination.y + self.verticalStep * 0.5)
         }
+        
+        guard let origin = extendedOrigin, let destination = extendedDestination else { return }
         
         // drawing the line
         let path = UIBezierPath()
@@ -119,8 +130,6 @@ class Grid: SKNode {
         shape.strokeColor = UIColor.red
         shape.lineWidth = 5.0
         self.addChild(shape)
-        
-        print("\(origin) \(destination)")
     }
     
     // MARK: - Signs
