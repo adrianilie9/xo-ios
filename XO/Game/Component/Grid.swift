@@ -42,7 +42,7 @@ class Grid: SKNode {
      *
      * - parameter point: coordinate to query
      * - returns: 2D tuple with map location or nil if not found
-    */
+     */
     public func getMapPosition(point: CGPoint) -> GridMapLocation? {
         var x: Int? = nil
         var y: Int? = nil
@@ -60,9 +60,16 @@ class Grid: SKNode {
         return GridMapLocation(x: lX, y: lY)
     }
     
+    fileprivate func getMiddlePoint(location: GridMapLocation) -> CGPoint {
+        let x = CGFloat(location.x) * self.horizontalStep + self.horizontalStep * 0.5
+        let y = CGFloat(location.y) * self.verticalStep + self.verticalStep * 0.5
+        
+        return CGPoint(x: CGFloat(x), y: CGFloat(y))
+    }
+    
     // MARK: - Lines
     
-    public func drawLines() {
+    fileprivate func drawLines() {
         self.horizontalStep = self.size.width / 3.0
         self.verticalStep = self.size.height / 3.0
         
@@ -81,7 +88,7 @@ class Grid: SKNode {
         }
     }
     
-    private func drawLine(origin: CGPoint, destination: CGPoint) {
+    fileprivate func drawLine(origin: CGPoint, destination: CGPoint) {
         let path = UIBezierPath()
         path.move(to: origin)
         path.addLine(to: destination)
@@ -91,6 +98,29 @@ class Grid: SKNode {
         shape.strokeColor = UIColor.black
         shape.lineWidth = 3.0
         self.addChild(shape)
+    }
+    
+    fileprivate func drawWinningLine(origin: CGPoint, destination: CGPoint) {
+        if (origin.x == destination.x) { // vertical line
+            
+        } else if (origin.y == destination.y) { // horizontal line
+            
+        } else { // diagonal line
+            
+        }
+        
+        // drawing the line
+        let path = UIBezierPath()
+        path.move(to: origin)
+        path.addLine(to: destination)
+        
+        let shape = SKShapeNode()
+        shape.path = path.cgPath
+        shape.strokeColor = UIColor.red
+        shape.lineWidth = 5.0
+        self.addChild(shape)
+        
+        print("\(origin) \(destination)")
     }
     
     // MARK: - Signs
@@ -120,5 +150,12 @@ class Grid: SKNode {
     
     func getSignsCount() -> Int {
         return self.mapSignsCount
+    }
+    
+    public func drawWinningLine(line: (GridMapLocation, GridMapLocation, GridMapLocation)) {
+        self.drawWinningLine(
+            origin: self.getMiddlePoint(location: line.0),
+            destination: self.getMiddlePoint(location: line.2)
+        )
     }
 }

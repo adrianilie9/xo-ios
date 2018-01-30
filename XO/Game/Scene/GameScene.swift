@@ -148,14 +148,13 @@ class GameScene: SKScene {
             nextState = .Draw
         }
         
-        guard let state = nextState else {
-            return
-        }
+        guard let state = nextState else { return }
         
         print(state)
+        self.state = state
         
         if let line = winningLine {
-            print(line)
+            self.grid?.drawWinningLine(line: line)
         }
     }
     
@@ -202,6 +201,5 @@ class GameScene: SKScene {
                 }
             }
         }
-        
     }
 }
