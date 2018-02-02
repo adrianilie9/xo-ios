@@ -21,6 +21,10 @@
 		A0425F6620192AFB003B1B15 /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425F6520192AFB003B1B15 /* Array2D.swift */; };
 		A0C20B59201E60E90084012A /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C20B58201E60E90084012A /* Grid.swift */; };
 		A0C20B5C201E611E0084012A /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C20B5B201E611E0084012A /* Sign.swift */; };
+		E8450EB32024BF5F006161E1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8450EB22024BF5F006161E1 /* Player.swift */; };
+		E8450EB52024BF7A006161E1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8450EB42024BF7A006161E1 /* Board.swift */; };
+		E8450EB82024BF8E006161E1 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8450EB72024BF8E006161E1 /* Move.swift */; };
+		E8450EBA2024BFA0006161E1 /* Strategist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8450EB92024BFA0006161E1 /* Strategist.swift */; };
 		E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A176851FFD263500F4D3A7 /* AppDelegate.swift */; };
 		E8A176911FFD263500F4D3A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8A1768F1FFD263500F4D3A7 /* Main.storyboard */; };
 		E8A176931FFD263500F4D3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A176921FFD263500F4D3A7 /* Assets.xcassets */; };
@@ -46,6 +50,10 @@
 		A0425F6520192AFB003B1B15 /* Array2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		A0C20B58201E60E90084012A /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		A0C20B5B201E611E0084012A /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
+		E8450EB22024BF5F006161E1 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		E8450EB42024BF7A006161E1 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		E8450EB72024BF8E006161E1 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		E8450EB92024BFA0006161E1 /* Strategist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strategist.swift; sourceTree = "<group>"; };
 		E8A176821FFD263500F4D3A7 /* XO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A176851FFD263500F4D3A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8A176901FFD263500F4D3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +136,17 @@
 				34EF3F6A4CCB6F063F64CCB4 /* Pods-XO.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E8450EB12024BF4F006161E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E8450EB22024BF5F006161E1 /* Player.swift */,
+				E8450EB72024BF8E006161E1 /* Move.swift */,
+				E8450EB42024BF7A006161E1 /* Board.swift */,
+				E8450EB92024BFA0006161E1 /* Strategist.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		E8A176791FFD263500F4D3A7 = {
@@ -213,6 +232,7 @@
 		E8A176A41FFD289400F4D3A7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E8450EB12024BF4F006161E1 /* Model */,
 				A0C20B5D201E61410084012A /* Scene */,
 				A0C20B5A201E61140084012A /* Component */,
 			);
@@ -355,8 +375,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8450EB32024BF5F006161E1 /* Player.swift in Sources */,
 				A020A52A20015BEA0047F5F1 /* UISettings.swift in Sources */,
+				E8450EB52024BF7A006161E1 /* Board.swift in Sources */,
+				E8450EB82024BF8E006161E1 /* Move.swift in Sources */,
 				A033E7BF1FFD7C3B00A19BAB /* GameScene.swift in Sources */,
+				E8450EBA2024BFA0006161E1 /* Strategist.swift in Sources */,
 				A0C20B5C201E611E0084012A /* Sign.swift in Sources */,
 				E8A176861FFD263500F4D3A7 /* AppDelegate.swift in Sources */,
 				E8A176AE1FFD397D00F4D3A7 /* NXDeviceDetector.swift in Sources */,
