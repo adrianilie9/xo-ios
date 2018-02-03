@@ -8,11 +8,6 @@
 import UIKit
 import SpriteKit
 
-enum GameMode {
-    case PlayerVersusPlayer
-    case PlayerVersusAI
-}
-
 enum GameState {
     case WaitingPlayer1Turn
     case WaitingPlayer2Turn
@@ -22,19 +17,20 @@ enum GameState {
 }
 
 class GameScene: SKScene {
-    
-    private var grid: Grid?
-    
-    private var mode: GameMode?
+    private var players: [Player]
     private var state: GameState = .WaitingPlayer1Turn
     private var updateAI: TimeInterval = 0.0
+    
+    private var grid: Grid?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(size: CGSize, mode: GameMode) {
+    init(size: CGSize, players: [Player]) {
         super.init(size: size)
+        
+        self.players = players
         
         let gridSize = CGSize(width: self.size.width * 0.663, height: self.size.width * 0.663)
         self.grid = Grid.init(size: gridSize)
@@ -47,19 +43,15 @@ class GameScene: SKScene {
         }
         
         self.backgroundColor = UIColor.white
-        
-        self.mode = mode
     }
     
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
-        if (self.mode == .PlayerVersusAI && self.state == .WaitingPlayer2Turn && currentTime - 1.0 >= self.updateAI) {
+        if (self.players.filter() { $0.type == Player.PlayerType.AI }.count >= 0 && currentTime - 1.0 >= self.updateAI) {
             self.updateAI = currentTime
             
             print("UpdateAI")
-            
-            
         }
     }
     

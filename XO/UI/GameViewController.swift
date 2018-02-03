@@ -98,7 +98,7 @@ class GameViewController: UIViewController {
     func prepareScene() {
         self.gameScene = GameScene.init(
             size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 100.0),
-            mode: .PlayerVersusPlayer
+            [Player.init(type: .Human, number: .One), Player.init(type: .Human, number: .Two)]
         )
     }
     
