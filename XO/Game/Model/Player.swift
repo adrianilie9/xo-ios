@@ -16,16 +16,9 @@ class Player : NSObject {
     }
     public var type: PlayerType
     
-    enum PlayerNumber {
-        case One
-        case Two
-    }
-    public var number: PlayerNumber
-    
-    init(type: PlayerType, number: PlayerNumber) {
-        self.playerId = type.hashValue + number.hashValue
+    init(type: PlayerType) {
+        self.playerId = type.hashValue + Int(arc4random())
         
         self.type = type
-        self.number = number
     }
 }

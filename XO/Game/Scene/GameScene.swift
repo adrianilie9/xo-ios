@@ -9,16 +9,16 @@ import UIKit
 import SpriteKit
 
 enum GameState {
-    case WaitingPlayer1Turn
-    case WaitingPlayer2Turn
-    case WonPlayer1
-    case WonPlayer2
+    case WaitingPlayerTurn
+    case WonPlayer
     case Draw
 }
 
 class GameScene: SKScene {
     private var players: [Player]
-    private var state: GameState = .WaitingPlayer1Turn
+    private var board: Board
+    
+    private var currentPlayerIndex = 0
     private var updateAI: TimeInterval = 0.0
     
     private var grid: Grid?
@@ -28,12 +28,18 @@ class GameScene: SKScene {
     }
     
     init(size: CGSize, players: [Player]) {
+        // creating model
+        assert(players.count == 2, "There must be exactly 2 players each game.")
+        self.players = players
+        self.board = Board()
+        
+        self.state = .WaitingPlayerTurn
+        
         super.init(size: size)
         
-        self.players = players
-        
+        // adding the grid
         let gridSize = CGSize(width: self.size.width * 0.663, height: self.size.width * 0.663)
-        self.grid = Grid.init(size: gridSize)
+        self.grid = Grid.init(size: gridSize, board: self.board, players: self.players)
         if let grid = self.grid {
             grid.position = CGPoint.init(
                 x: (self.size.width - gridSize.width) / 2.0,
@@ -42,23 +48,65 @@ class GameScene: SKScene {
             self.addChild(grid)
         }
         
+        // setting UI
         self.backgroundColor = UIColor.white
     }
     
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
-        if (self.players.filter() { $0.type == Player.PlayerType.AI }.count >= 0 && currentTime - 1.0 >= self.updateAI) {
+        if (self.getCurrentPlayer()?.type == .AI && currentTime - 1.0 >= self.updateAI) {
             self.updateAI = currentTime
             
             print("UpdateAI")
         }
     }
     
-    // MARK: - State
+    private var state: GameState {
+        didSet {
+            switch (state) {
+            case .WaitingPlayerTurn:
+                print("-")
+            case .WonPlayer:
+                print("Player won")
+            case .Draw:
+                print("Draw")
+            }
+        }
+    }
     
-    func evaluateState() {
+    public func getCurrentPlayer() -> Player? {
+        if (self.state == .WaitingPlayerTurn) {
+            return self.players[self.currentPlayerIndex]
+        }
         
+        return nil
+    }
+    
+    public func switchPlayerTurn() {
+        // checking status
+        let winResult = self.board.evaluateWin()
+        if winResult.0 != nil {
+            if let line = winResult.1 {
+                self.grid?.drawWinningLine(line: line)
+            }
+            
+            self.state = .WonPlayer
+            
+            return
+        } else if (self.board.isFull()) {
+            self.state = .Draw
+            
+            return
+        }
+        
+        
+        // switching turn
+        self.currentPlayerIndex += 1
+        
+        if (self.currentPlayerIndex >= self.players.count) {
+            self.currentPlayerIndex = 0
+        }
     }
     
     // MARK: - Input
@@ -68,40 +116,26 @@ class GameScene: SKScene {
         
         for node in self.nodes(at: touch.location(in: self.view)) {
             if let grid = node as? Grid {
+                // checking if current player can perform move
+                let currentPlayer = self.getCurrentPlayer()
+                guard let player = currentPlayer else { return }
+                if (player.type != .Human) { return }
+                
                 let gridTouchLocation = touch.location(in: grid)
                 guard let location = grid.getMapPosition(point: gridTouchLocation) else { return }
                 
-                if (self.mode == .PlayerVersusPlayer) {
-                    var signToAdd: Sign?
-                    var nextState: GameState?
-                    if (self.state == .WaitingPlayer1Turn) {
-                        signToAdd = Sign(type: .X, color: .Player1)
-                        nextState = .WaitingPlayer2Turn
-                    } else if (self.state == .WaitingPlayer2Turn) {
-                        signToAdd = Sign(type: .O, color: .Player2)
-                        nextState = .WaitingPlayer1Turn
-                    }
-                    
-                    guard let sign = signToAdd, let state = nextState else { return }
-                    
-                    if (grid.addSign(location: location, sign: sign)) {
-                        self.state = state
-                        self.evaluateState()
-                    } else {
-                        // TODO: play animation - invalid position
-                    }
-                } else if (self.mode == .PlayerVersusAI) {
-                    if (self.state == .WaitingPlayer1Turn) {
-                        if (grid.addSign(location: location, sign: Sign(type: .X, color: .Player1))) {
-                            self.state = .WaitingPlayer2Turn
-                            self.evaluateState()
-                        } else {
-                            // TODO: play animation - invalid position
-                        }
-                    } else if (self.state == .WaitingPlayer2Turn) {
-                        // TODO: play animation - wait for computer turn
-                    }
+                // creating move
+                let move = Move(player: player, boardMapLocation: location)
+                if (!self.board.canPerformMove(move: move)) {
+                    // TODO: play animation - invalid position
+                    return
                 }
+                
+                // performing move
+                self.board.performMove(move: move)
+                
+                // switching turn
+                self.switchPlayerTurn()
             }
         }
     }

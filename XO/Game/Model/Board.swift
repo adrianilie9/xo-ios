@@ -12,7 +12,13 @@ struct BoardMapLocation {
     var y: Int
 }
 
+protocol BoardDelegate: class {
+    func performedMove(move: Move)
+}
+
 class Board : NSObject {
+    weak var delegate: BoardDelegate?
+    
     fileprivate var map = Array2D<Move>(columns: 3, rows: 3)
     
     func canPerformMove(move: Move) -> Bool {
@@ -25,6 +31,8 @@ class Board : NSObject {
     
     func performMove(move: Move) -> Void {
         self.map[move.boardMapLocation.x, move.boardMapLocation.y] = move
+        
+        self.delegate?.performedMove(move: move)
     }
     
     func isFull() -> Bool {

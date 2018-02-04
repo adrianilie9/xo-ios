@@ -8,27 +8,29 @@
 import Foundation
 import SpriteKit
 
-struct GridMapLocation {
-    var x: Int
-    var y: Int
-}
-
-class Grid: SKNode {
+class Grid: SKNode, BoardDelegate {
+    fileprivate var playerSigns: Dictionary<Int, SignType>
+    
     public var size: CGSize = CGSize.zero
     private var horizontalStep: CGFloat = 0.0
     private var verticalStep: CGFloat = 0.0
     
-    fileprivate var map = Array2D<Sign>(columns: 3, rows: 3)
-    fileprivate var mapSignsCount = 0
+    fileprivate var board: Board
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(size: CGSize) {
-        super.init()
-        
+    init(size: CGSize, board: Board, players: [Player]) {
         self.size = size
+        self.board = board
+        self.playerSigns = [
+            players[0].playerId: SignType.X,
+            players[1].playerId: SignType.O
+        ]
+        
+        super.init()
+        self.board.delegate = self
         
         let background = SKSpriteNode.init(color: UIColor.white, size: size)
         background.anchorPoint = CGPoint.zero
@@ -41,9 +43,9 @@ class Grid: SKNode {
      * Transforms a CG coordinate into a map location.
      *
      * - parameter point: coordinate to query
-     * - returns: 2D tuple with map location or nil if not found
+     * - returns: BoardMapLocation or nil if not found
      */
-    public func getMapPosition(point: CGPoint) -> GridMapLocation? {
+    public func getMapPosition(point: CGPoint) -> BoardMapLocation? {
         var x: Int? = nil
         var y: Int? = nil
         
@@ -57,10 +59,10 @@ class Grid: SKNode {
         
         guard let lX = x, let lY = y else { return nil }
         
-        return GridMapLocation(x: lX, y: lY)
+        return BoardMapLocation(x: lX, y: lY)
     }
     
-    fileprivate func getMiddlePoint(location: GridMapLocation) -> CGPoint {
+    fileprivate func getMiddlePoint(location: BoardMapLocation) -> CGPoint {
         let x = CGFloat(location.x) * self.horizontalStep + self.horizontalStep * 0.5
         let y = CGFloat(location.y) * self.verticalStep + self.verticalStep * 0.5
         
@@ -132,39 +134,31 @@ class Grid: SKNode {
         self.addChild(shape)
     }
     
+    public func drawWinningLine(line: (BoardMapLocation, BoardMapLocation, BoardMapLocation)) {
+        self.drawWinningLine(
+            origin: self.getMiddlePoint(location: line.0),
+            destination: self.getMiddlePoint(location: line.2)
+        )
+    }
+    
     // MARK: - Signs
     
-    func addSign(location: GridMapLocation, sign: Sign) -> Bool {
-        if (self.map[location.x, location.y] != nil) {
-            return false
-        }
-        
-        self.map[location.x, location.y] = sign
-        
+    func addSign(location: BoardMapLocation, sign: Sign) {
         sign.sprite.position = CGPoint(
             x: CGFloat(location.x) * self.horizontalStep + self.horizontalStep * 0.5,
             y: CGFloat(location.y) * self.verticalStep + self.verticalStep * 0.5
         )
         sign.sprite.fontSize = (self.size.width * 0.35 + self.size.height * 0.35) / 2.0
         self.addChild(sign.sprite)
+    }
+    
+    // MARK: - BoardDelegate
+    func performedMove(move: Move) {
+        guard let signType = self.playerSigns[move.player.playerId] else { return }
         
-        self.mapSignsCount += 1
-        
-        return true
-    }
-    
-    func getSign(location: GridMapLocation) -> Sign? {
-        return self.map[location.x, location.y]
-    }
-    
-    func getSignsCount() -> Int {
-        return self.mapSignsCount
-    }
-    
-    public func drawWinningLine(line: (GridMapLocation, GridMapLocation, GridMapLocation)) {
-        self.drawWinningLine(
-            origin: self.getMiddlePoint(location: line.0),
-            destination: self.getMiddlePoint(location: line.2)
+        self.addSign(
+            location: move.boardMapLocation,
+            sign: Sign(type: signType)
         )
     }
 }
