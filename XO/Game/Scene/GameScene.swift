@@ -15,10 +15,8 @@ enum GameState {
 }
 
 class GameScene: SKScene {
-    private var players: [Player]
     private var board: Board
     
-    private var currentPlayerIndex = 0
     private var updateAI: TimeInterval = 0.0
     
     private var grid: Grid?
@@ -30,8 +28,7 @@ class GameScene: SKScene {
     init(size: CGSize, players: [Player]) {
         // creating model
         assert(players.count == 2, "There must be exactly 2 players each game.")
-        self.players = players
-        self.board = Board()
+        self.board = Board(players: players)
         
         self.state = .WaitingPlayerTurn
         
@@ -39,7 +36,7 @@ class GameScene: SKScene {
         
         // adding the grid
         let gridSize = CGSize(width: self.size.width * 0.663, height: self.size.width * 0.663)
-        self.grid = Grid.init(size: gridSize, board: self.board, players: self.players)
+        self.grid = Grid.init(size: gridSize, board: self.board, players: players)
         if let grid = self.grid {
             grid.position = CGPoint.init(
                 x: (self.size.width - gridSize.width) / 2.0,
@@ -55,7 +52,7 @@ class GameScene: SKScene {
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
-        if (self.getCurrentPlayer()?.type == .AI && currentTime - 1.0 >= self.updateAI) {
+        if (self.board.getCurrentPlayer()?.type == .AI && currentTime - 1.0 >= self.updateAI) {
             self.updateAI = currentTime
             
             print("UpdateAI")
@@ -75,15 +72,7 @@ class GameScene: SKScene {
         }
     }
     
-    public func getCurrentPlayer() -> Player? {
-        if (self.state == .WaitingPlayerTurn) {
-            return self.players[self.currentPlayerIndex]
-        }
-        
-        return nil
-    }
-    
-    public func switchPlayerTurn() {
+    public func evaluateGameUpdate() {
         // checking status
         let winResult = self.board.evaluateWin()
         if winResult.0 != nil {
@@ -99,14 +88,6 @@ class GameScene: SKScene {
             
             return
         }
-        
-        
-        // switching turn
-        self.currentPlayerIndex += 1
-        
-        if (self.currentPlayerIndex >= self.players.count) {
-            self.currentPlayerIndex = 0
-        }
     }
     
     // MARK: - Input
@@ -117,7 +98,7 @@ class GameScene: SKScene {
         for node in self.nodes(at: touch.location(in: self.view)) {
             if let grid = node as? Grid {
                 // checking if current player can perform move
-                let currentPlayer = self.getCurrentPlayer()
+                let currentPlayer = self.board.getCurrentPlayer()
                 guard let player = currentPlayer else { return }
                 if (player.type != .Human) { return }
                 
@@ -134,8 +115,8 @@ class GameScene: SKScene {
                 // performing move
                 self.board.performMove(move: move)
                 
-                // switching turn
-                self.switchPlayerTurn()
+                // updating game
+                self.evaluateGameUpdate()
             }
         }
     }

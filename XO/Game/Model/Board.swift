@@ -16,10 +16,15 @@ protocol BoardDelegate: class {
     func performedMove(move: Move)
 }
 
-class Board : NSObject {
+class Board : NSObject, NSCopying {
     weak var delegate: BoardDelegate?
     
     fileprivate var map = Array2D<Move>(columns: 3, rows: 3)
+    fileprivate var movesPerfomed = Array<Move>()
+    
+    init(players: [Player]) {
+        self.players = players
+    }
     
     func canPerformMove(move: Move) -> Bool {
         if (self.map[move.boardMapLocation.x, move.boardMapLocation.y] != nil) {
@@ -31,6 +36,7 @@ class Board : NSObject {
     
     func performMove(move: Move) -> Void {
         self.map[move.boardMapLocation.x, move.boardMapLocation.y] = move
+        self.movesPerfomed.append(move)
         
         self.delegate?.performedMove(move: move)
     }
@@ -110,5 +116,37 @@ class Board : NSObject {
         }
         
         return (winningPlayer, winningLine)
+    }
+    
+    // MARK: - NSCopying
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Board(players: self.players)
+        copy.map = self.map
+        copy.movesPerfomed = Array(self.movesPerfomed)
+        return copy
+    }
+    
+    // MARK: - AI
+    
+    fileprivate let players: [Player]
+    fileprivate var currentPlayer: Player? {
+        get {
+            if (self.movesPerfomed.count == 0) {
+                return self.players[0]
+            } else {
+                let lastMovePlayer = self.movesPerfomed[self.movesPerfomed.count - 1].player
+                let otherPlayers = self.players.filter() { $0.playerId != lastMovePlayer.playerId }
+                if (otherPlayers.count == 1) {
+                    return otherPlayers[0]
+                }
+            }
+            
+            return nil
+        }
+    }
+    
+    public func getCurrentPlayer() -> Player? {
+        return self.currentPlayer
     }
 }
