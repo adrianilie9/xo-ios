@@ -15,6 +15,7 @@ enum GameState {
 class GameScene: SKScene {
     private weak var viewController: GameViewController?
     
+    private var players: [Player]
     private var board: Board
     
     private var strategist: Strategist!
@@ -31,6 +32,7 @@ class GameScene: SKScene {
         
         // creating model
         assert(players.count == 2, "There must be exactly 2 players each game.")
+        self.players = players
         self.board = Board(players: players)
         self.strategist = Strategist(board: self.board)
         
@@ -85,11 +87,35 @@ class GameScene: SKScene {
         didSet {
             switch (state) {
             case .WaitingPlayerTurn:
-                print("-")
+                break
             case .WonPlayer:
-                print("Player won")
+                let hasAIPlayer = (self.players.filter() { $0.type == .AI }.count == 1) ? true : false
+                if (hasAIPlayer) {
+                    if let losingPlayer = self.board.getCurrentPlayer() {
+                        if (losingPlayer.type == .AI) {
+                            self.viewController?.displayInfo(info: "Victory")
+                        } else if (losingPlayer.type == .Human) {
+                            self.viewController?.displayInfo(info: "Defeat")
+                        }
+                    }
+                } else {
+                    if let losingPlayer = self.board.getCurrentPlayer() {
+                        if (losingPlayer.playerId == self.players[1].playerId) {
+                            self.viewController?.displayInfo(info: "Player 1 ( X ) is Victorious")
+                        } else if (losingPlayer.playerId == self.players[0].playerId) {
+                            self.viewController?.displayInfo(info: "Player 2 ( O ) is Victorious")
+                        }
+                    }
+                }
+                
+                self.viewController?.setupRestartScene()
+                
+                break
             case .Draw:
-                print("Draw")
+                self.viewController?.displayInfo(info: "Draw")
+                self.viewController?.setupRestartScene()
+                
+                break
             }
         }
     }
@@ -116,6 +142,7 @@ class GameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        if (self.state != .WaitingPlayerTurn) { return }
         
         for node in self.nodes(at: touch.location(in: self.view)) {
             if let grid = node as? Grid {
@@ -131,7 +158,7 @@ class GameScene: SKScene {
                 let move = Move(player: player, boardMapLocation: location)
                 if (!self.board.canPerformMove(move: move)) {
                     if let viewController = self.viewController {
-                        viewController.displayInfo(info: "Invalid move")
+                        viewController.displayInfoFade(info: "Invalid move")
                     }
                     
                     return

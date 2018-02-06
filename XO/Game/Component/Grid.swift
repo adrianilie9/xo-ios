@@ -127,7 +127,7 @@ class Grid: SKNode, BoardDelegate {
         
         let shape = SKShapeNode()
         shape.path = path.cgPath
-        shape.strokeColor = UIColor.red
+        shape.strokeColor = UIColor.init(red: 62.0/255.0, green: 92.0/255.0, blue: 156.0/255.0, alpha: 1.0)
         shape.lineWidth = 5.0
         self.addChild(shape)
     }

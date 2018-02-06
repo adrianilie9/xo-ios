@@ -81,7 +81,14 @@ class GameViewController: UIViewController {
     
     // MARK: - Content
     
-    public func displayInfo(info: String) {
+    public func setupRestartScene() {
+        let tapRestart = UITapGestureRecognizer.init(target: self, action: #selector(self.restartScene))
+        tapRestart.numberOfTapsRequired = 1
+        self.sceneView.addGestureRecognizer(tapRestart)
+        
+    }
+    
+    public func displayInfoFade(info: String) {
         self.infoLabel.text = info
         
         UIView.animate(withDuration: 0.15, animations: {
@@ -95,9 +102,17 @@ class GameViewController: UIViewController {
         }
     }
     
+    public func displayInfo(info: String) {
+        self.infoLabel.text = info
+        
+        UIView.animate(withDuration: 0.15, animations: {
+            self.infoLabel.alpha = 1.0
+        })
+    }
+    
     // MARK: - Scene
     
-    func prepareScene() {
+    fileprivate func prepareScene() {
         var players = Array<Player>()
         players.append(Player.init(type: .Human))
         
@@ -114,8 +129,25 @@ class GameViewController: UIViewController {
         )
     }
     
-    func loadScene() {
+    fileprivate func loadScene() {
         self.sceneView.presentScene(self.gameScene)
+    }
+    
+    @objc fileprivate func restartScene() {
+        if let gestureRecognizers = self.sceneView.gestureRecognizers {
+            for gestureRecognizer in gestureRecognizers {
+                self.sceneView.removeGestureRecognizer(gestureRecognizer)
+            }
+        }
+        
+        self.gameScene = nil
+        self.sceneView.presentScene(nil)
+        
+        self.infoLabel.text = ""
+        self.infoLabel.alpha = 0.0
+        
+        self.prepareScene()
+        self.loadScene()
     }
     
     // MARK: - Navigation
