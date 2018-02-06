@@ -2,17 +2,18 @@
 //  MenuViewController.swift
 //  XO
 //
-//  Copyright © 2018 Nixiware. All rights reserved.
-//
 
 import UIKit
 
 class MenuViewController: UIViewController {
     
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var buttonPlayView: UIView!
-    @IBOutlet weak var buttonPlayBackgroundImageView: UIImageView!
-    @IBOutlet weak var buttonPlayLabel: UILabel!
+    @IBOutlet weak var buttonPlayAIView: UIView!
+    @IBOutlet weak var buttonPlayAIBackgroundImageView: UIImageView!
+    @IBOutlet weak var buttonPlayAILabel: UILabel!
+    @IBOutlet weak var buttonPlayHumanView: UIView!
+    @IBOutlet weak var buttonPlayHumanBackgroundImageView: UIImageView!
+    @IBOutlet weak var buttonPlayHumanLabel: UILabel!
     @IBOutlet weak var labelCopyright: UILabel!
     
     override func viewDidLoad() {
@@ -34,24 +35,39 @@ class MenuViewController: UIViewController {
     }
     
     func setupUi() {
-        self.buttonPlayBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
-        let playButtonText = NSMutableAttributedString.init(string: "\u{f04b}  Play")
-        playButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.fontFontAwesomeSolid, size: 30.0)!], range: NSMakeRange(0, 1))
-        playButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.font1Bold, size: 32.0)!], range: NSMakeRange(1, playButtonText.length - 1))
-        self.buttonPlayLabel.attributedText = playButtonText
-        
-        let tapPlayButton = UITapGestureRecognizer.init(target: self, action: #selector(self.startGameAction))
-        tapPlayButton.numberOfTapsRequired = 1
-        self.buttonPlayView.addGestureRecognizer(tapPlayButton)
-        
-        self.labelCopyright.text = "Copyright \u{00A9} Nixiware 2018"
+        self.labelCopyright.text = "Copyright \u{00A9} Adrian Ilie 2018"
         self.labelCopyright.font = UIFont.init(name: UISettings.sharedInstance.font2Regular, size: 18.0)
+        
+        // setting up play AI button
+        self.buttonPlayAIBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
+        let playAIButtonText = NSMutableAttributedString.init(string: "\u{f233} Play vs. AI")
+        playAIButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.fontFontAwesomeSolid, size: 22.0)!], range: NSMakeRange(0, 1))
+        playAIButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.font1Bold, size: 20.0)!], range: NSMakeRange(1, playAIButtonText.length - 1))
+        self.buttonPlayAILabel.attributedText = playAIButtonText
+        
+        let tapPlayAIButton = UITapGestureRecognizer.init(target: self, action: #selector(self.startGameAction(sender:)))
+        tapPlayAIButton.numberOfTapsRequired = 1
+        self.buttonPlayAIView.addGestureRecognizer(tapPlayAIButton)
+        self.buttonPlayAIView.tag = 0
+        
+        // setting up play human button
+        self.buttonPlayHumanBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
+        let playHumanButtonText = NSMutableAttributedString.init(string: "\u{f0c0} Play vs. Human")
+        playHumanButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.fontFontAwesomeSolid, size: 20.0)!], range: NSMakeRange(0, 1))
+        playHumanButtonText.setAttributes([NSAttributedStringKey.font: UIFont.init(name: UISettings.sharedInstance.font1Bold, size: 20.0)!], range: NSMakeRange(1, playHumanButtonText.length - 1))
+        self.buttonPlayHumanLabel.attributedText = playHumanButtonText
+        
+        let tapPlayHumanButton = UITapGestureRecognizer.init(target: self, action: #selector(self.startGameAction(sender:)))
+        tapPlayHumanButton.numberOfTapsRequired = 1
+        self.buttonPlayHumanView.addGestureRecognizer(tapPlayHumanButton)
+        self.buttonPlayHumanView.tag = 1
     }
     
     func showUi(completionHandler: (() -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             self.logoImageView.alpha = 1.0
-            self.buttonPlayView.alpha = 1.0
+            self.buttonPlayAIView.alpha = 1.0
+            self.buttonPlayHumanView.alpha = 1.0
             self.labelCopyright.alpha = 1.0
         }) { (finished: Bool) in
             completionHandler?()
@@ -61,7 +77,8 @@ class MenuViewController: UIViewController {
     func hideUi(completionHandler: (() -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             self.logoImageView.alpha = 0.0
-            self.buttonPlayView.alpha = 0.0
+            self.buttonPlayAIView.alpha = 0.0
+            self.buttonPlayHumanView.alpha = 0.0
             self.labelCopyright.alpha = 0.0
         }) { (finished: Bool) in
             completionHandler?()
@@ -76,13 +93,21 @@ class MenuViewController: UIViewController {
     
     // MARK: - Navigation
     
-    @objc func startGameAction() {
-        self.buttonPlayBackgroundImageView.image = UIImage.init(named: "Button_Play_Touched")
-        
-        let gameViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController")
+    @objc func startGameAction(sender: Any?) {
+        let gameViewController = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameViewController") as! GameViewController
+        if let sender = sender as? UITapGestureRecognizer {
+            if (sender.view?.tag == self.buttonPlayAIView.tag) {
+                gameViewController.mode = GameViewController.GameMode.AI
+                self.buttonPlayAIBackgroundImageView.image = UIImage.init(named: "Button_Play_Touched")
+            } else if (sender.view?.tag == self.buttonPlayHumanView.tag) {
+                gameViewController.mode = GameViewController.GameMode.Human
+                self.buttonPlayHumanBackgroundImageView.image = UIImage.init(named: "Button_Play_Touched")
+            }
+        }
         
         self.hideUi {
-            self.buttonPlayBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
+            self.buttonPlayAIBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
+            self.buttonPlayHumanBackgroundImageView.image = UIImage.init(named: "Button_Play_Default")
             self.present(gameViewController, animated: false, completion: nil)
         }
     }

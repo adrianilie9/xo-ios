@@ -2,8 +2,6 @@
 //  Grid.swift
 //  XO
 //
-//  Copyright © 2018 Nixiware. All rights reserved.
-//
 
 import Foundation
 import SpriteKit
@@ -134,6 +132,11 @@ class Grid: SKNode, BoardDelegate {
         self.addChild(shape)
     }
     
+    /**
+     * Draws the horizontal/vertical/diagonal winning line.
+     *
+     * - parameter line: tuple consisting the 3 BoardMapLocations defining a winning line
+     */
     public func drawWinningLine(line: (BoardMapLocation, BoardMapLocation, BoardMapLocation)) {
         self.drawWinningLine(
             origin: self.getMiddlePoint(location: line.0),
@@ -143,7 +146,7 @@ class Grid: SKNode, BoardDelegate {
     
     // MARK: - Signs
     
-    func addSign(location: BoardMapLocation, sign: Sign) {
+    fileprivate func addSign(location: BoardMapLocation, sign: Sign) {
         sign.sprite.position = CGPoint(
             x: CGFloat(location.x) * self.horizontalStep + self.horizontalStep * 0.5,
             y: CGFloat(location.y) * self.verticalStep + self.verticalStep * 0.5

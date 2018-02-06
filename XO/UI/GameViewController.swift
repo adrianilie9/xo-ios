@@ -2,20 +2,21 @@
 //  GameViewController.swift
 //  XO
 //
-//  Copyright © 2018 Nixiware. All rights reserved.
-//
 
 import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    enum GameMode {
+        case AI
+        case Human
+    }
+    
+    public var mode: GameMode = GameMode.AI
     
     @IBOutlet weak var buttonMenuView: UIView!
     @IBOutlet weak var buttonMenuBackgroundImageView: UIImageView!
     @IBOutlet weak var buttonMenuLabel: UILabel!
-    
-    @IBOutlet weak var countdownIconLabel: UILabel!
-    @IBOutlet weak var countdownLabel: UILabel!
     
     @IBOutlet weak var sceneView: SKView!
     
@@ -56,21 +57,15 @@ class GameViewController: UIViewController {
         tapMenuButton.numberOfTapsRequired = 1
         self.buttonMenuView.addGestureRecognizer(tapMenuButton)
         
-        self.countdownIconLabel.text = "\u{f2f2}"
-        self.countdownIconLabel.font = UIFont.init(name: UISettings.sharedInstance.fontFontAwesomeSolid, size: 30.0)
-        self.countdownIconLabel.textColor = UIColor.init(red: 90.0/255.0, green: 177.0/255.0, blue: 142.0/255.0, alpha: 1.0)
-        
-        self.countdownLabel.text = "00:00:00"
-        self.countdownLabel.font = UIFont.init(name: UISettings.sharedInstance.font1Bold, size: 25.0)
-        self.countdownLabel.textColor = UIColor.init(red: 90.0/255.0, green: 177.0/255.0, blue: 142.0/255.0, alpha: 1.0)
+        self.infoLabel.text = ""
+        self.infoLabel.font = UIFont.init(name: UISettings.sharedInstance.font1Regular, size: 20.0)
+        self.infoLabel.textColor = UIColor.black
+        self.infoLabel.alpha = 0.0
     }
     
     func hideUi(completionHandler: (() -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             self.buttonMenuView.alpha = 0.0
-            
-            self.countdownIconLabel.alpha = 0.0
-            self.countdownLabel.alpha = 0.0
         }) { (finished: Bool) in
             completionHandler?()
         }
@@ -79,9 +74,6 @@ class GameViewController: UIViewController {
     func showUi(completionHandler: (() -> Void)?) {
         UIView.animate(withDuration: 0.25, animations: {
             self.buttonMenuView.alpha = 1.0
-            
-            self.countdownIconLabel.alpha = 1.0
-            self.countdownLabel.alpha = 1.0
         }) { (finished: Bool) in
             completionHandler?()
         }
@@ -89,16 +81,36 @@ class GameViewController: UIViewController {
     
     // MARK: - Content
     
-    func setupContent() {
+    public func displayInfo(info: String) {
+        self.infoLabel.text = info
         
+        UIView.animate(withDuration: 0.15, animations: {
+            self.infoLabel.alpha = 1.0
+        }) { (completed: Bool) in
+            if (completed) {
+                UIView.animate(withDuration: 2.0, animations: {
+                    self.infoLabel.alpha = 0.0
+                })
+            }
+        }
     }
     
     // MARK: - Scene
     
     func prepareScene() {
+        var players = Array<Player>()
+        players.append(Player.init(type: .Human))
+        
+        if (self.mode == .AI) {
+            players.append(Player.init(type: .AI))
+        } else if (self.mode == .Human) {
+            players.append(Player.init(type: .Human))
+        }
+        
         self.gameScene = GameScene.init(
             size: CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 100.0),
-            players: [Player.init(type: .Human), Player.init(type: .AI)]
+            players: players,
+            viewController: self
         )
     }
     

@@ -270,7 +270,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = Nixiware;
+				ORGANIZATIONNAME = "Adrian Ilie";
 				TargetAttributes = {
 					E8A176811FFD263500F4D3A7 = {
 						CreatedOnToolsVersion = 9.2;

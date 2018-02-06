@@ -2,8 +2,6 @@
 //  GameScene.swift
 //  XO
 //
-//  Copyright © 2018 Nixiware. All rights reserved.
-//
 
 import UIKit
 import SpriteKit
@@ -15,6 +13,8 @@ enum GameState {
 }
 
 class GameScene: SKScene {
+    private weak var viewController: GameViewController?
+    
     private var board: Board
     
     private var strategist: Strategist!
@@ -26,7 +26,9 @@ class GameScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(size: CGSize, players: [Player]) {
+    init(size: CGSize, players: [Player], viewController: GameViewController) {
+        self.viewController = viewController
+        
         // creating model
         assert(players.count == 2, "There must be exactly 2 players each game.")
         self.board = Board(players: players)
@@ -128,7 +130,10 @@ class GameScene: SKScene {
                 // creating move
                 let move = Move(player: player, boardMapLocation: location)
                 if (!self.board.canPerformMove(move: move)) {
-                    // TODO: play animation - invalid position
+                    if let viewController = self.viewController {
+                        viewController.displayInfo(info: "Invalid move")
+                    }
+                    
                     return
                 }
                 
