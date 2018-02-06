@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GameplayKit
 
 struct BoardMapLocation {
     var x: Int
@@ -16,15 +17,45 @@ protocol BoardDelegate: class {
     func performedMove(move: Move)
 }
 
-class Board : NSObject, NSCopying {
+class Board : NSObject, NSCopying, GKGameModel {
     weak var delegate: BoardDelegate?
+    
+    init(players: [GKGameModelPlayer]?) {
+        self.players = players
+    }
+    
+    // MARK: - Players
+    var players: [GKGameModelPlayer]?
+    var activePlayer: GKGameModelPlayer? {
+        get {
+            guard let players = self.players else { return nil }
+            
+            if (self.movesPerfomed.count == 0) {
+                return players[0]
+            } else {
+                let lastMovePlayer = self.movesPerfomed[self.movesPerfomed.count - 1].player
+                let otherPlayers = players.filter() { $0.playerId != lastMovePlayer.playerId }
+                if (otherPlayers.count == 1) {
+                    return otherPlayers[0]
+                }
+            }
+            
+            return nil
+        }
+    }
+    
+    public func getCurrentPlayer() -> Player? {
+        if let activePlayer = self.activePlayer as? Player {
+            return activePlayer
+        }
+        
+        return nil
+    }
+    
+    // MARK: - Moves
     
     fileprivate var map = Array2D<Move>(columns: 3, rows: 3)
     fileprivate var movesPerfomed = Array<Move>()
-    
-    init(players: [Player]) {
-        self.players = players
-    }
     
     func canPerformMove(move: Move) -> Bool {
         if (self.map[move.boardMapLocation.x, move.boardMapLocation.y] != nil) {
@@ -122,31 +153,57 @@ class Board : NSObject, NSCopying {
     
     func copy(with zone: NSZone? = nil) -> Any {
         let copy = Board(players: self.players)
-        copy.map = self.map
-        copy.movesPerfomed = Array(self.movesPerfomed)
+        copy.setGameModel(self)
         return copy
     }
     
-    // MARK: - AI
+    // MARK: - GKGameModel
     
-    fileprivate let players: [Player]
-    fileprivate var currentPlayer: Player? {
-        get {
-            if (self.movesPerfomed.count == 0) {
-                return self.players[0]
-            } else {
-                let lastMovePlayer = self.movesPerfomed[self.movesPerfomed.count - 1].player
-                let otherPlayers = self.players.filter() { $0.playerId != lastMovePlayer.playerId }
-                if (otherPlayers.count == 1) {
-                    return otherPlayers[0]
-                }
-            }
-            
-            return nil
+    func setGameModel(_ gameModel: GKGameModel) {
+        if let board = gameModel as? Board {
+            self.map = board.map
+            self.movesPerfomed = Array(self.movesPerfomed)
         }
     }
     
-    public func getCurrentPlayer() -> Player? {
-        return self.currentPlayer
+    func gameModelUpdates(for player: GKGameModelPlayer) -> [GKGameModelUpdate]? {
+        guard let player = player as? Player else { return nil }
+        if (self.isWin(for: player)) { return nil }
+        
+        var moves = [Move]()
+        
+        for x in 0 ... 2 {
+            for y in 0 ... 2 {
+                let move = Move(player: player, boardMapLocation: BoardMapLocation(x: x, y: y))
+                if (self.canPerformMove(move: move)) {
+                    moves.append(move)
+                }
+            }
+        }
+        
+        return moves
+    }
+    
+    func apply(_ gameModelUpdate: GKGameModelUpdate) {
+        guard let move = gameModelUpdate as? Move else { return }
+        
+        self.performMove(move: move)
+    }
+    
+    func isWin(for player: GKGameModelPlayer) -> Bool {
+        let result = self.evaluateWin()
+        guard let winningPlayer = result.0 else { return false }
+        
+        return player.playerId == winningPlayer.playerId
+    }
+    
+    func score(for player: GKGameModelPlayer) -> Int {
+        guard let player = player as? Player else { return 0 }
+        
+        if (self.isWin(for: player)) {
+            return 1
+        }
+        
+        return 0
     }
 }

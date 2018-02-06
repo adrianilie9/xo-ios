@@ -17,6 +17,7 @@ enum GameState {
 class GameScene: SKScene {
     private var board: Board
     
+    private var strategist: Strategist!
     private var updateAI: TimeInterval = 0.0
     
     private var grid: Grid?
@@ -29,6 +30,7 @@ class GameScene: SKScene {
         // creating model
         assert(players.count == 2, "There must be exactly 2 players each game.")
         self.board = Board(players: players)
+        self.strategist = Strategist(board: self.board)
         
         self.state = .WaitingPlayerTurn
         
@@ -52,10 +54,28 @@ class GameScene: SKScene {
     // MARK: - Update
     
     override func update(_ currentTime: TimeInterval) {
-        if (self.board.getCurrentPlayer()?.type == .AI && currentTime - 1.0 >= self.updateAI) {
+        if (self.state == .WaitingPlayerTurn &&
+            self.board.getCurrentPlayer()?.type == .AI &&
+            currentTime - 2.0 >= self.updateAI) {
             self.updateAI = currentTime
             
-            print("UpdateAI")
+            DispatchQueue.global().async {
+                let strategistTime = CFAbsoluteTimeGetCurrent()
+                guard let bestBoardMapLocation = self.strategist.getBestBoardMapLocation() else { return }
+                
+                let delta = CFAbsoluteTimeGetCurrent() - strategistTime
+                
+                let aiTimeCeiling = 0.75
+                let delay = max(delta, aiTimeCeiling)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                    guard let player = self.board.getCurrentPlayer() else { return }
+                    let move = Move(player: player, boardMapLocation: bestBoardMapLocation)
+                    self.board.performMove(move: move)
+                    
+                    self.evaluateGameUpdate()
+                })
+            }
         }
     }
     

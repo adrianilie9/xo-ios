@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import GameplayKit
 
-class Move : NSObject {
+class Move : NSObject, GKGameModelUpdate {
     public var player: Player
     public var boardMapLocation: BoardMapLocation
     

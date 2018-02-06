@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import GameplayKit
 
-class Player : NSObject {
+class Player : NSObject, GKGameModelPlayer {
     public var playerId: Int
     
     enum PlayerType {
